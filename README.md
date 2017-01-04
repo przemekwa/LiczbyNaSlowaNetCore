@@ -1,3 +1,5 @@
+[![NuGet Version](https://img.shields.io/nuget/v/LiczbyNaSlowaNETCore.svg?style=flat)](https://www.nuget.org/packages/LiczbyNaSlowaNETCore/)[![Join the chat at https://gitter.im/LiczbyNaSlowaNET/LiczbyNaSlowaCoreNet?source=orgpage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/LiczbyNaSlowaNET/LiczbyNaSlowaCoreNet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 # LiczbyNaSlowaNetCore
 
 Konwerter liczb na odpowiedniki słowne z zachowaniem polskiej gramatyki. 
