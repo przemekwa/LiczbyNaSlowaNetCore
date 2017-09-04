@@ -1,18 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3829D8BC-1351-49D3-B950-DC2C3CBCD3CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48E5B33D-6B80-42E1-9B41-2EE3BC3A92E3}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LiczbyNaSlowaNetCore", "src\LiczbyNaSlowaNetCore\LiczbyNaSlowaNetCore.xproj", "{F1A6ED67-7E3C-4997-BFE3-A5DB13DC8DE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiczbyNaSlowaNetCore", "src\LiczbyNaSlowaNetCore\LiczbyNaSlowaNetCore.csproj", "{F1A6ED67-7E3C-4997-BFE3-A5DB13DC8DE8}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LiczbyNaSlowaNetCoreTests", "src\LiczbyNaSlowaNetCoreTests\LiczbyNaSlowaNetCoreTests.xproj", "{B5F2D5D6-840D-42B4-A69B-BF680DB94A8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiczbyNaSlowaNetCoreTests", "src\LiczbyNaSlowaNetCoreTests\LiczbyNaSlowaNetCoreTests.csproj", "{B5F2D5D6-840D-42B4-A69B-BF680DB94A8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
