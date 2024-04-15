@@ -5,30 +5,36 @@ namespace LiczbyNaSlowaNETCore.Dictionaries
 {
     using System.Collections.Generic;
 
-    using Currencies;
-
     public class PolishDictionary : ICurrencyDictionary
     {
+        public List<string> Unity { get; }
+        public List<string> OthersTens { get; }
+        public List<string> Tens { get; }
+        public List<string> Hundreds { get; }
+        public string[,] Endings { get; }
+        public List<string> Sign { get; }
+        public string[,] Current { get; }
+        public bool HasStems { get; } = false;
         public PolishDictionary()
         {
             Unity = new List<string>
                 {
-                    "","jeden","dwa" , "trzy", "cztery", "piec", "szesc", "siedem", "osiem", "dziewiec","zero"
+                    "", "jeden", "dwa", "trzy", "cztery", "piec", "szesc", "siedem", "osiem", "dziewiec","zero"
                 };
 
             OthersTens = new List<string>
                 {
-                    "","jedenascie", "dwanascie","trzynascie" , "czternascie", "pietnascie", "szesnascie", "siedemnascie", "osiemnascie", "dziewietnascie"
+                    "", "jedenascie", "dwanascie", "trzynascie", "czternascie", "pietnascie", "szesnascie", "siedemnascie", "osiemnascie", "dziewietnascie"
                 };
 
             Tens = new List<string>
                 {
-                    "","dziesiec", "dwadziescia","trzydziesci" , "czterdziesci", "piecdziesiat", "szescdziesiat", "siedemdziesiat", "osiemdziesiat", "dziewiecdziesiat"
+                    "", "dziesiec", "dwadziescia", "trzydziesci", "czterdziesci", "piecdziesiat", "szescdziesiat", "siedemdziesiat", "osiemdziesiat", "dziewiecdziesiat"
                 };
 
             Hundreds = new List<string>
                 {
-                    "","sto", "dwiescie","trzysta" , "czterysta", "piecset", "szescset", "siedemset", "osiemset", "dziewiecset"
+                    "", "sto", "dwiescie", "trzysta", "czterysta", "piecset", "szescset", "siedemset", "osiemset", "dziewiecset"
                 };
 
             Endings = new[,]
@@ -54,22 +60,5 @@ namespace LiczbyNaSlowaNETCore.Dictionaries
             };
         }
 
-        public List<string> Unity { get; }
-
-        public List<string> OthersTens { get; }
-
-        public List<string> Tens { get; }
-
-        public List<string> Hundreds { get; }
-
-        public string[,] Endings { get; }
-
-        public List<string> Sign { get; }
-
-        public string[,] Current { get; }
-
-        
-
-        public bool HasStems { get; } = false;
     }
 }

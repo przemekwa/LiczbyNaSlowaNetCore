@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LiczbyNaSlowaNETCore;
+﻿using LiczbyNaSlowaNETCore;
 using LiczbyNaSlowaNETCore.Dictionaries;
-using LiczbyNaSlowaNETCore.Dictionaries.Currencies;
 
 namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
 {

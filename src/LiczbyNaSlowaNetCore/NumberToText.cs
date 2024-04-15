@@ -10,7 +10,6 @@ namespace LiczbyNaSlowaNETCore
     using Algorithms;
     using Dictionaries;
     using Dictionaries.Currencies;
-    using System.Linq;
 
     public enum Currency
     {
@@ -37,7 +36,7 @@ namespace LiczbyNaSlowaNETCore
         /// <param name="number">Number to convert</param>
         /// <param name="currency">Currency of number</param>
         /// <param name="stems">Stems</param>
-        /// <returns>he words describe number</returns>
+        /// <returns>words that describe the number</returns>
         public static string Convert(int number, Currency currency = Currency.NONE, bool stems = false )
         {
             return Convert( (long)number, currency, stems );

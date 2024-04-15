@@ -1,8 +1,6 @@
 ﻿
 // Copyright (c) 2014 Przemek Walkowski
 
-using System;
-
 using LiczbyNaSlowaNETCore;
 using Xunit;
 

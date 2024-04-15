@@ -3,13 +3,11 @@
 
 namespace LiczbyNaSlowaNETCore
 {
-    using Dictionaries.Currencies;
-
     public interface INumberToTextOptions
     {
-        Currency Currency { get; set; }
-        Dictionaries.ICurrencyDictionary Dictionary { get; set; }
-        string SplitDecimal { get; set; }
-        bool Stems { get; set; }
+        public Currency Currency { get; set; }
+        public Dictionaries.ICurrencyDictionary Dictionary { get; set; }
+        public string SplitDecimal { get; set; }
+        public bool Stems { get; set; }
     }
 }

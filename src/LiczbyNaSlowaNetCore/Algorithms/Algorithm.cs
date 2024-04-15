@@ -18,18 +18,8 @@ namespace LiczbyNaSlowaNETCore
         
         protected Algorithm(ICurrencyDictionary dictionary, ICurrencyDeflation currencyDeflation, string splitDecimal, bool withStems )
         {
-            if (dictionary == null)
-            {
-                throw new ArgumentNullException(nameof(dictionary));
-            }
-
-            if (currencyDeflation == null)
-            {
-                throw new ArgumentNullException(nameof(currencyDeflation));
-            }
-
-            this.dictionary = dictionary;
-            this.currencyDeflation = currencyDeflation;
+            this.dictionary = dictionary ?? throw new ArgumentNullException(nameof(dictionary));
+            this.currencyDeflation = currencyDeflation ?? throw new ArgumentNullException(nameof(currencyDeflation));
             this.splitDecimal = splitDecimal;
             this.withStems = withStems;
         }
