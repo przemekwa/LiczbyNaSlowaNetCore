@@ -14,32 +14,32 @@ namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
        [Fact]
         public void Test_4_4()
         {
-            Assert.Equal("cztery czterdzieści", NumberToText.Convert(4.4M, this.NumberToTextOptions));
+            Assert.Equal("cztery czterdzieści", NumberToText.Convert(4.4M, this.PolishDictionaryWithStemsOptions));
         }
 
        [Fact]
         public void Test_4_40()
         {
-            Assert.Equal("cztery czterdzieści", NumberToText.Convert(4.40M, this.NumberToTextOptions));
+            Assert.Equal("cztery czterdzieści", NumberToText.Convert(4.40M, this.PolishDictionaryWithStemsOptions));
         }
 
 
        [Fact]
         public void Test_12_23()
         {
-            Assert.Equal("dwanaście dwadzieścia trzy", NumberToText.Convert(12.23M, this.NumberToTextOptions));
+            Assert.Equal("dwanaście dwadzieścia trzy", NumberToText.Convert(12.23M, this.PolishDictionaryWithStemsOptions));
         }
 
        [Fact]
         public void Test_12()
         {
-            Assert.Equal("dwanaście", NumberToText.Convert(12M, this.NumberToTextOptions));
+            Assert.Equal("dwanaście", NumberToText.Convert(12M, this.PolishDictionaryWithStemsOptions));
         }
 
        [Fact]
         public void Test_0_12()
         {
-            Assert.Equal("zero dwanaście", NumberToText.Convert(0.12M, this.NumberToTextOptions));
+            Assert.Equal("zero dwanaście", NumberToText.Convert(0.12M, this.PolishDictionaryWithStemsOptions));
         }
 
        [Fact]

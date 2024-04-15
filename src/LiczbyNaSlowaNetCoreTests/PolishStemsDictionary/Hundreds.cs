@@ -14,7 +14,7 @@ namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
        [Fact]
         public void Test_123()
         {
-            Assert.Equal("sto dwadzieścia trzy", NumberToText.Convert(123, this.NumberToTextOptions));
+            Assert.Equal("sto dwadzieścia trzy", NumberToText.Convert(123, this.PolishDictionaryWithStemsOptions));
         }
 
        [Fact]

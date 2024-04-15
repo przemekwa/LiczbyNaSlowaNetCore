@@ -5,15 +5,23 @@ namespace LiczbyNaSlowaNETCore.Algorithms
 {
     using System.Linq;
     using System.Text;
-
     using Dictionaries.Currencies;
     using Dictionaries;
     using System.Collections.Generic;
+
     internal sealed class CurrencyAlgorithm : Algorithm
     {
-        public CurrencyAlgorithm(ICurrencyDictionary dictionary, ICurrencyDeflation currencyDeflation, string splitDecimal, bool stems ) :
-           base(dictionary, currencyDeflation, splitDecimal, stems)
-        { }
+        public CurrencyAlgorithm(
+            ICurrencyDictionary dictionary,
+            ICurrencyDeflation currencyDeflation,
+            string splitDecimal,
+            bool stems
+            )
+            : base(dictionary,
+                  currencyDeflation,
+                  splitDecimal,
+                  stems
+                  ) { }
 
         private readonly StringBuilder result = new StringBuilder();
        
@@ -23,40 +31,33 @@ namespace LiczbyNaSlowaNETCore.Algorithms
         {
             var currentPhase = DeflationPhraseType.BeforeComma;
 
-            foreach (var number in numbers )
+            foreach (var number in numbers)
             {
                 var partialResult = new StringBuilder();
-
                 if (number == 0)
                 {
-                    partialResult.Append(dictionary.Unity[10]);
-
+                    partialResult.Append(Dictionary.Unity[10]);
                     partialResult.Append(" ");
-
-                    partialResult.Append( currencyDeflation.GetDeflationPhrase( currentPhase, 2, withStems ) );
-
+                    partialResult.Append(CurrencyDeflation.GetDeflationPhrase( currentPhase, 2, WithStems ));
                     result.Append(partialResult.ToString().Trim());
-
                     result.Append(" ");
-
                     currentPhase = DeflationPhraseType.AfterComma;
-
                     continue;
-                   
                 }
 
                 if (number < 0)
                 {
-                    partialResult.Append(dictionary.Sign[2]);
+                    partialResult.Append(Dictionary.Sign[2]);
                 }
 
-                var tempNumber = number;
+                long tempNumber = number;
 
                 int order = 0;
                 int hundreds = 0, tens = 0, unity = 0, othersTens = 0, sumAboveUnity = 0;
 
                 while (tempNumber != 0)
                 {
+                    // possible overflow exception
                     hundreds = (int)( ( tempNumber % 1000 ) / 100 );
                     tens = (int)( ( tempNumber % 100 ) / 10 );
                     unity = (int)( tempNumber % 10 );
@@ -82,24 +83,24 @@ namespace LiczbyNaSlowaNETCore.Algorithms
                         var tempPartialResult = partialResult.ToString().Trim();
 
                         partialResult.Clear();
-                        var properUnity = dictionary.Unity;
+                        var properUnity = Dictionary.Unity;
 
-                        if (currentPhase == DeflationPhraseType.AfterComma && currencyDeflation is ICurrencyNotMaleDeflectionAfterComma && tens == 0)
+                        if (currentPhase == DeflationPhraseType.AfterComma && CurrencyDeflation is ICurrencyNotMaleDeflectionAfterComma && tens == 0)
                         {
-                            properUnity = ( currencyDeflation as ICurrencyNotMaleDeflectionAfterComma ).GetAfterCommaUnity( withStems );
+                            properUnity = ( CurrencyDeflation as ICurrencyNotMaleDeflectionAfterComma ).GetAfterCommaUnity( WithStems );
                         }
 
-                        if (currentPhase == DeflationPhraseType.BeforeComma && currencyDeflation is ICurrencyNotMaleDeflectionBeforeComma)
+                        if (currentPhase == DeflationPhraseType.BeforeComma && CurrencyDeflation is ICurrencyNotMaleDeflectionBeforeComma)
                         {
-                            properUnity = ( currencyDeflation as ICurrencyNotMaleDeflectionBeforeComma ).GetBeforeCommaUnity( withStems );
+                            properUnity = ( CurrencyDeflation as ICurrencyNotMaleDeflectionBeforeComma ).GetBeforeCommaUnity( WithStems );
                         }
 
                         partialResult.AppendFormat( "{0}{1}{2}{3}{4}{5}",
-                            this.SetSpaceBeforeString( dictionary.Hundreds[ hundreds ] ),
-                            this.SetSpaceBeforeString( dictionary.Tens[ tens ] ),
-                            this.SetSpaceBeforeString( dictionary.OthersTens[ othersTens ] ),
+                            this.SetSpaceBeforeString( Dictionary.Hundreds[ hundreds ] ),
+                            this.SetSpaceBeforeString( Dictionary.Tens[ tens ] ),
+                            this.SetSpaceBeforeString( Dictionary.OthersTens[ othersTens ] ),
                             this.SetSpaceBeforeString( properUnity[ unity ] ),
-                            this.SetSpaceBeforeString( dictionary.Endings[ order, grammarForm ] ),
+                            this.SetSpaceBeforeString( Dictionary.Endings[ order, grammarForm ] ),
                             this.SetSpaceBeforeString( tempPartialResult ) );
                     }
 
@@ -111,33 +112,45 @@ namespace LiczbyNaSlowaNETCore.Algorithms
                 // hm we are using here some variables (unity, tens, sumabove) that are modified inside above while loop and only there
                 // and yet we are using them here, outside loop. It would be better if we could use them only inside while loop...
                 partialResult.Append( this.SetSpaceBeforeString(
-                    currencyDeflation.GetDeflationPhrase( currentPhase, GetCurrencyForm( number, othersTens ), withStems ) ) );
+                    CurrencyDeflation.GetDeflationPhrase( currentPhase, GetCurrencyForm( number, othersTens ), WithStems ) ) );
 
                 result.Append(partialResult.ToString().Trim());
 
                 result.Append(" ");
 
-                if (currentPhase == DeflationPhraseType.BeforeComma && !string.IsNullOrEmpty( splitDecimal ))
+                if (currentPhase == DeflationPhraseType.BeforeComma && !string.IsNullOrEmpty( SplitDecimal ))
                 {
-                    result.Append(splitDecimal);
+                    result.Append(SplitDecimal);
                     result.Append(" ");
                 }
 
                 currentPhase = DeflationPhraseType.AfterComma;
             }
 
-            return result.ToString().Trim();
+            var finalResult = WithStems ? result.ToString() : RemoveStems(result.ToString());
+            return finalResult.Trim();
         }
 
-        private int GetCurrencyForm( long number, int othersTens )
+        private string RemoveStems(string input)
+        {
+            return input.Replace('ą', 'a')
+                .Replace('ę', 'e')
+                .Replace('ó', 'o')
+                .Replace('ł', 'l')
+                .Replace('ć', 'c')
+                .Replace('ń', 'n')
+                .Replace('ś', 's')
+                .Replace('ż', 'z')
+                .Replace('ź', 'z');
+        }
+
+        private int GetCurrencyForm(long number, int othersTens)
         {
             var hundreds = ( number % 1000 ) / 100;
-
             var tens = ( number % 100 ) / 10;
-
             var unity = number % 10;
 
-            if( unity == 1 && ( hundreds + tens + othersTens == 0 ) )
+            if( unity == 1 && (hundreds + tens + othersTens == 0) )
             {
                 return 0;
             }
@@ -150,7 +163,7 @@ namespace LiczbyNaSlowaNETCore.Algorithms
             return 2;
         }
 
-        private int GetGrammarForm( int unity, int sumAboveUnity )
+        private int GetGrammarForm(int unity, int sumAboveUnity)
         {
             if ( unity == 1 && sumAboveUnity == 0)
                 return  0;

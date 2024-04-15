@@ -11,20 +11,20 @@ namespace LiczbyNaSlowaNETCore
     using Dictionaries.Currencies;
     internal abstract class Algorithm : IAlgorithm
     {
-        protected readonly ICurrencyDictionary dictionary;
-        protected readonly ICurrencyDeflation currencyDeflation;
-        protected readonly string splitDecimal;
-        protected readonly bool withStems;
+        protected readonly ICurrencyDictionary Dictionary;
+        protected readonly ICurrencyDeflation CurrencyDeflation;
+        protected readonly string SplitDecimal;
+        protected readonly bool WithStems;
         
         protected Algorithm(ICurrencyDictionary dictionary, ICurrencyDeflation currencyDeflation, string splitDecimal, bool withStems )
         {
-            this.dictionary = dictionary ?? throw new ArgumentNullException(nameof(dictionary));
-            this.currencyDeflation = currencyDeflation ?? throw new ArgumentNullException(nameof(currencyDeflation));
-            this.splitDecimal = splitDecimal;
-            this.withStems = withStems;
+            Dictionary = dictionary ?? throw new ArgumentNullException(nameof(dictionary));
+            CurrencyDeflation = currencyDeflation ?? throw new ArgumentNullException(nameof(currencyDeflation));
+            SplitDecimal = splitDecimal;
+            WithStems = withStems;
         }
 
-        public abstract string Build( IEnumerable<long> numbers );
+        public abstract string Build(IEnumerable<long> numbers);
 
         protected virtual string SetSpaceBeforeString(string @string)
         {

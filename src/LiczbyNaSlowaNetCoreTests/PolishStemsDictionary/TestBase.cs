@@ -3,12 +3,13 @@ using LiczbyNaSlowaNETCore.Dictionaries;
 
 namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
 {
-    public abstract class TestBase
+    public class TestBase
     {
-        protected NumberToTextOptions NumberToTextOptions { get; set; } = new NumberToTextOptions
+        protected NumberToTextOptions PolishDictionaryWithStemsOptions { get; set; } = new NumberToTextOptions
         {
             Dictionary = new PolishWithsStemsDictionary(),
-            Currency = Currency.NONE
+            Currency = Currency.NONE,
+            Stems = true
         };
     }
 }

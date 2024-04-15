@@ -4,7 +4,6 @@
 namespace LiczbyNaSlowaNETCore
 {
     using Dictionaries;
-    using Dictionaries.Currencies;
 
     public class NumberToTextOptions : INumberToTextOptions
     {
