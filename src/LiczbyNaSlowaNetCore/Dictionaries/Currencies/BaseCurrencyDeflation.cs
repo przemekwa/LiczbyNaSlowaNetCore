@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using LiczbyNaSlowaNetCore.Interfaces;
 
 namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
@@ -12,7 +9,7 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
         protected readonly string[,] noStemsPhrases;
         protected readonly string[,] withStemsPhrases;
 
-        protected BaseCurrencyDeflation( string[,] noStemsPhrases, string[,] withStemsPhrases )
+        protected BaseCurrencyDeflation(string[,] noStemsPhrases, string[,] withStemsPhrases )
         {
             this.noStemsPhrases = noStemsPhrases;
             this.withStemsPhrases = withStemsPhrases;

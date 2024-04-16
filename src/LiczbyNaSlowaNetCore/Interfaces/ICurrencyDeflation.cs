@@ -1,4 +1,6 @@
-﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿using LiczbyNaSlowaNETCore;
+
+namespace LiczbyNaSlowaNetCore.Interfaces
 {
     public enum DeflationPhraseType { BeforeComma = 1, AfterComma };
 
@@ -12,6 +14,6 @@
         /// </summary>
         Currency CurrencyCode { get; }
 
-        string GetDeflationPhrase( DeflationPhraseType phraseType, int grammarForm, bool withStems );
+        string GetDeflationPhrase(DeflationPhraseType phraseType, int grammarForm, bool withStems);
     }
 }

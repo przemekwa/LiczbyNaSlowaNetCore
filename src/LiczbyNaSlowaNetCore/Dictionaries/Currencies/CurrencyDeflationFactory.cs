@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using LiczbyNaSlowaNetCore.Interfaces;
 
 namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {

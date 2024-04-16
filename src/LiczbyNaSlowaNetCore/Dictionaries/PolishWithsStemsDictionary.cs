@@ -4,6 +4,7 @@
 namespace LiczbyNaSlowaNETCore.Dictionaries
 {
     using System.Collections.Generic;
+    using LiczbyNaSlowaNetCore.Interfaces;
 
     public class PolishWithsStemsDictionary : ICurrencyDictionary
     {

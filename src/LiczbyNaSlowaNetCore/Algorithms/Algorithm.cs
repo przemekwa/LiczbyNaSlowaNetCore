@@ -3,12 +3,11 @@
 
 namespace LiczbyNaSlowaNETCore
 {
+    using Algorithms;
+    using LiczbyNaSlowaNetCore.Interfaces;
     using System;
     using System.Collections.Generic;
 
-    using Algorithms;
-    using Dictionaries;
-    using Dictionaries.Currencies;
     internal abstract class Algorithm : IAlgorithm
     {
         protected readonly ICurrencyDictionary Dictionary;

@@ -3,7 +3,7 @@
 
 namespace LiczbyNaSlowaNETCore
 {
-    using Dictionaries;
+    using LiczbyNaSlowaNetCore.Interfaces;
 
     public class NumberToTextOptions : INumberToTextOptions
     {

@@ -1,9 +1,9 @@
 ﻿
 // Copyright (c) 2014 Przemek Walkowski
 
-using LiczbyNaSlowaNETCore.Dictionaries;
+using LiczbyNaSlowaNETCore;
 
-namespace LiczbyNaSlowaNETCore
+namespace LiczbyNaSlowaNetCore.Interfaces
 {
     public interface INumberToTextOptions
     {
