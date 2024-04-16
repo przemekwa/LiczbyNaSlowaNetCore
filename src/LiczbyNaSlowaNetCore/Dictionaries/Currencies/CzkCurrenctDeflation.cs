@@ -11,36 +11,14 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
             : base(
                     new[ , ]
                     {
-                        {"", "", ""},
-                        {"korona czeska", "korony czeskie", "koron czeskich"},
-                        {"halerz", "halerze", "halerzy"}
-                    },
-                    new[ , ]
-                    {
-                        {"", "", ""},
-                        {"korona czeska", "korony czeskie", "koron czeskich"},
-                        {"halerz", "halerze", "halerzy"}
+                        { "", "", "" },
+                        { "korona czeska", "korony czeskie", "koron czeskich" },
+                        { "halerz", "halerze", "halerzy" }
                     } )
         {
-
         }
 
-        public List<string> GetBeforeCommaUnity( bool withStems )
-        {
-            if( withStems )
-            {
-                return new List<string>
-                {
-                    "","jedna","dwie" , "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć","zero"
-                };
-            }
-            else
-            {
-                return new List<string>
-                {
-                    "","jedna","dwie" , "trzy", "cztery", "piec", "szesc", "siedem", "osiem", "dziewiec","zero"
-                };
-            }
-        }
+        public List<string> GetBeforeCommaUnity() 
+            => new List<string> { "", "jedna", "dwie", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "zero" };
     }
 }

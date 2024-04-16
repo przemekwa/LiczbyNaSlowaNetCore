@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
     public class EurCurrencyDeflation : BaseCurrencyDeflation
     {
@@ -9,12 +7,6 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
         public EurCurrencyDeflation()
             : base(
             new[,]
-                {
-                    {"", "", ""},
-                    {"euro", "euro", "euro"},
-                    {"cent", "centy", "centow"}
-                },
-            new[,]
                     {
                     {"", "", ""},
                     {"euro", "euro", "euro"},
@@ -22,7 +14,6 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
                 })
 
         {
-
         }
     }
 }

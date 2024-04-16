@@ -14,6 +14,6 @@ namespace LiczbyNaSlowaNetCore.Interfaces
         /// </summary>
         Currency CurrencyCode { get; }
 
-        string GetDeflationPhrase(DeflationPhraseType phraseType, int grammarForm, bool withStems);
+        string GetDeflationPhrase(DeflationPhraseType phraseType, int grammarForm);
     }
 }

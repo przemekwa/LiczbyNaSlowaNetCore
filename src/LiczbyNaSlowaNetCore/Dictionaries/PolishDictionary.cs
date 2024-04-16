@@ -15,37 +15,38 @@ namespace LiczbyNaSlowaNETCore.Dictionaries
         public string[,] Endings { get; }
         public List<string> Sign { get; }
         public string[,] Current { get; }
-        public bool HasStems { get; } = false;
+        public bool HasStems { get; } = true;
+
         public PolishDictionary()
         {
             Unity = new List<string>
                 {
-                    "", "jeden", "dwa", "trzy", "cztery", "piec", "szesc", "siedem", "osiem", "dziewiec","zero"
+                    "", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "zero"
                 };
 
             OthersTens = new List<string>
                 {
-                    "", "jedenascie", "dwanascie", "trzynascie", "czternascie", "pietnascie", "szesnascie", "siedemnascie", "osiemnascie", "dziewietnascie"
+                    "", "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście"
                 };
 
             Tens = new List<string>
                 {
-                    "", "dziesiec", "dwadziescia", "trzydziesci", "czterdziesci", "piecdziesiat", "szescdziesiat", "siedemdziesiat", "osiemdziesiat", "dziewiecdziesiat"
+                    "", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt"
                 };
 
             Hundreds = new List<string>
                 {
-                    "", "sto", "dwiescie", "trzysta", "czterysta", "piecset", "szescset", "siedemset", "osiemset", "dziewiecset"
+                    "", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset"
                 };
 
-            Endings = new[,]
+            Endings = new string[,]
             {
-                {"","",""},
-                {"tysiac","tysiace","tysiecy"},
-                {"milion","miliony","milionow"},
-                {"miliard","miliardy","miliardow"},
-                {"bilion","biliony","bilionow"},
-                {"biliard","biliardy","biliardow"}
+                 { "", "", "" },
+                { "tysiąc", "tysiące", "tysięcy" },
+                { "milion", "miliony", "milionów" },
+                { "miliard", "miliardy", "miliardów" },
+                { "bilion", "biliony", "bilionów" },
+                { "biliard", "biliardy", "biliardów" }
             };
 
             Sign = new List<string>
@@ -53,13 +54,12 @@ namespace LiczbyNaSlowaNETCore.Dictionaries
                 "plus", "minus"
             };
 
-            Current = new[,]
+            Current = new string[,]
             {
-                {"","",""},
-                {"zloty","zlote","zlotych"},
-                {"grosz","grosze","groszy"}
+                { "", "", "" },
+                { "złoty", "złote", "złotych" },
+                { "grosz", "grosze", "groszy" }
             };
         }
-
     }
 }

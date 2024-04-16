@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
     public class ChfCurrencyDeflation : BaseCurrencyDeflation
     {
@@ -8,12 +6,6 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 
         public ChfCurrencyDeflation()
             : base(
-                 new[ , ]
-                {
-                    {"", "", ""},
-                    {"frank szwajcarski", "franki szwajcarskie", "frankow szwajcarskich"},
-                    {"centym", "centymy", "centymow"}
-                },
                   new[ , ]
                     {
                     {"", "", ""},
@@ -21,7 +13,6 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
                     {"centym", "centymy", "centymów"}
                 })
         {
-
         }
     }
 }

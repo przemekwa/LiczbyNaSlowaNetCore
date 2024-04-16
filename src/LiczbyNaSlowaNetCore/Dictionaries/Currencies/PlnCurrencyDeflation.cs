@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
     public class PlnCurrencyDeflation : BaseCurrencyDeflation
     {
@@ -8,21 +6,13 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 
         public PlnCurrencyDeflation()
             : base(
-                  new[ , ]
-                      {
-                        {"", "", ""},
-                        {"zloty", "zlote", "zlotych"},
-                        {"grosz", "grosze", "groszy"}
-                    },
-                  new[ , ]
-                    {
-                        {"", "", ""},
-                        {"złoty", "złote", "złotych"},
-                        {"grosz", "grosze", "groszy"}
-                    }
-                  )
+                new[,]
+                {
+                    { "", "", "" },
+                    { "złoty", "złote", "złotych" },
+                    { "grosz", "grosze", "groszy" }
+                })
         {
-
         }
     }
 }

@@ -37,7 +37,7 @@ namespace LiczbyNaSlowaNETCore.Algorithms
                 {
                     partialResult.Append(Dictionary.Unity[10]);
                     partialResult.Append(" ");
-                    partialResult.Append(CurrencyDeflation.GetDeflationPhrase( currentPhase, 2, WithStems ));
+                    partialResult.Append(CurrencyDeflation.GetDeflationPhrase(currentPhase, 2));
                     result.Append(partialResult.ToString().Trim());
                     result.Append(" ");
                     currentPhase = DeflationPhraseType.AfterComma;
@@ -86,12 +86,12 @@ namespace LiczbyNaSlowaNETCore.Algorithms
 
                         if (currentPhase == DeflationPhraseType.AfterComma && CurrencyDeflation is ICurrencyNotMaleDeflectionAfterComma && tens == 0)
                         {
-                            properUnity = ( CurrencyDeflation as ICurrencyNotMaleDeflectionAfterComma ).GetAfterCommaUnity( WithStems );
+                            properUnity = ( CurrencyDeflation as ICurrencyNotMaleDeflectionAfterComma ).GetAfterCommaUnity();
                         }
 
                         if (currentPhase == DeflationPhraseType.BeforeComma && CurrencyDeflation is ICurrencyNotMaleDeflectionBeforeComma)
                         {
-                            properUnity = ( CurrencyDeflation as ICurrencyNotMaleDeflectionBeforeComma ).GetBeforeCommaUnity( WithStems );
+                            properUnity = ( CurrencyDeflation as ICurrencyNotMaleDeflectionBeforeComma ).GetBeforeCommaUnity();
                         }
 
                         partialResult.AppendFormat( "{0}{1}{2}{3}{4}{5}",
@@ -111,7 +111,7 @@ namespace LiczbyNaSlowaNETCore.Algorithms
                 // hm we are using here some variables (unity, tens, sumabove) that are modified inside above while loop and only there
                 // and yet we are using them here, outside loop. It would be better if we could use them only inside while loop...
                 partialResult.Append( this.SetSpaceBeforeString(
-                    CurrencyDeflation.GetDeflationPhrase( currentPhase, GetCurrencyForm( number, othersTens ), WithStems ) ) );
+                    CurrencyDeflation.GetDeflationPhrase(currentPhase, GetCurrencyForm( number, othersTens )) ) );
 
                 result.Append(partialResult.ToString().Trim());
 

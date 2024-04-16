@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
     public class HufCurrencyDeflation : BaseCurrencyDeflation
     {
@@ -8,20 +6,13 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 
         public HufCurrencyDeflation()
             : base(
-                  new[ , ]
-                                {
-                    {"", "", ""},
-                    {"forint", "forinty", "forintow"},
-                    {"", "", ""}
-                },
                 new[ , ]
-                                  {
-                    {"", "", ""},
-                    {"forint", "forinty", "forintów"},
-                    {"", "", ""}
-                } )
+                {
+                    { "", "", "" },
+                    { "forint", "forinty", "forintów" },
+                    { "", "", "" }
+                })
         {
-
         }
     }
 }

@@ -1,12 +1,9 @@
 ﻿
 // Copyright (c) 2014 Przemek Walkowski
 
-using System;
-
 using LiczbyNaSlowaNETCore;
-using System.Globalization;
 using LiczbyNaSlowaNETCore.Dictionaries;
-
+using System.Globalization;
 using Xunit;
 
 namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
@@ -19,7 +16,7 @@ namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
             {
                 Stems = true,
                 Currency = currency,
-                Dictionary = new PolishWithsStemsDictionary()
+                Dictionary = new PolishDictionary()
             };
         }
 

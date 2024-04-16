@@ -1,26 +1,18 @@
-﻿using System.Collections.Generic;
-
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
     public class UsdCurrencyDeflation : BaseCurrencyDeflation
     {
         public override Currency CurrencyCode => Currency.USD;
 
         public UsdCurrencyDeflation()
-            :base( new[ , ]
-                   {
-                    {"", "", ""},
-                    {"dolar", "dolary", "dolarow"},
-                    {"cent", "centy", "centow"}
-                },
-                new[ , ]
+            : base(
+                new[,]
                     {
-                    {"", "", ""},
-                    {"dolar", "dolary", "dolarów"},
-                    {"cent", "centy", "centów"}
-                } )
+                        { "", "", "" },
+                        { "dolar", "dolary", "dolarów" },
+                        { "cent", "centy", "centów" }
+                })
         {
-
         }
     }
 }

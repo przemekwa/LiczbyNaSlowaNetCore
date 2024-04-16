@@ -5,6 +5,6 @@ namespace LiczbyNaSlowaNetCore.Interfaces
 {
     public interface ICurrencyNotMaleDeflectionBeforeComma
     {
-        List<string> GetBeforeCommaUnity(bool withStems);
+        List<string> GetBeforeCommaUnity();
     }
 }

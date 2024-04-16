@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
     public class EmptyCurrencyDeflation : BaseCurrencyDeflation
     {
@@ -8,12 +6,6 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 
         public EmptyCurrencyDeflation()
             : base(
-                  new[ , ]
-                    {
-                        {"", "", ""},
-                        {"", "", ""},
-                        {"", "", ""}
-                    },
                   new[ , ]
                     {
                         {"", "", ""},
