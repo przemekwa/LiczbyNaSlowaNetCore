@@ -11,7 +11,7 @@ namespace LiczbyNaSlowaNETCore.Algorithms
     internal sealed class CurrencyAlgorithm : Algorithm
     {
         public CurrencyAlgorithm(
-            ICurrencyDictionary dictionary,
+            IDeclensionDictionary dictionary,
             ICurrencyDeflation currencyDeflation,
             string splitDecimal,
             bool stems

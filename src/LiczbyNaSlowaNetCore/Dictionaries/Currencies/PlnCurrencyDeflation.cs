@@ -3,16 +3,11 @@
     public class PlnCurrencyDeflation : BaseCurrencyDeflation
     {
         public override Currency CurrencyCode => Currency.PLN;
-
-        public PlnCurrencyDeflation()
-            : base(
-                new[,]
-                {
-                    { "", "", "" },
-                    { "złoty", "złote", "złotych" },
-                    { "grosz", "grosze", "groszy" }
-                })
+        public override string[,] Phases => new[,]
         {
-        }
+            { string.Empty, string.Empty, string.Empty },
+            { "złoty", "złote", "złotych" },
+            { "grosz", "grosze", "groszy" }
+        };
     }
 }

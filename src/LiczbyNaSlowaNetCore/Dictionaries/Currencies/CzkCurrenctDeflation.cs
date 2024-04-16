@@ -3,22 +3,17 @@ using LiczbyNaSlowaNetCore.Interfaces;
 
 namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
-    public class CzkCurrenctDeflation : BaseCurrencyDeflation, ICurrencyNotMaleDeflectionBeforeComma
+    public sealed class CzkCurrenctDeflation : BaseCurrencyDeflation, ICurrencyNotMaleDeflectionBeforeComma
     {
         public override Currency CurrencyCode => Currency.CZK;
-
-        public CzkCurrenctDeflation()
-            : base(
-                    new[ , ]
-                    {
-                        { "", "", "" },
-                        { "korona czeska", "korony czeskie", "koron czeskich" },
-                        { "halerz", "halerze", "halerzy" }
-                    } )
+        public override string[,] Phases => new[,]
         {
-        }
+            { string.Empty, string.Empty, string.Empty },
+            { "korona czeska", "korony czeskie", "koron czeskich" },
+            { "halerz", "halerze", "halerzy" }
+        };
 
         public List<string> GetBeforeCommaUnity() 
-            => new List<string> { "", "jedna", "dwie", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "zero" };
+            => new List<string> { string.Empty, "jedna", "dwie", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "zero" };
     }
 }

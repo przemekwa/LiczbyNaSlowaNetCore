@@ -10,12 +10,12 @@ namespace LiczbyNaSlowaNETCore
 
     internal abstract class Algorithm : IAlgorithm
     {
-        protected readonly ICurrencyDictionary Dictionary;
+        protected readonly IDeclensionDictionary Dictionary;
         protected readonly ICurrencyDeflation CurrencyDeflation;
         protected readonly string SplitDecimal;
         protected readonly bool WithStems;
         
-        protected Algorithm(ICurrencyDictionary dictionary, ICurrencyDeflation currencyDeflation, string splitDecimal, bool withStems )
+        protected Algorithm(IDeclensionDictionary dictionary, ICurrencyDeflation currencyDeflation, string splitDecimal, bool withStems )
         {
             Dictionary = dictionary ?? throw new ArgumentNullException(nameof(dictionary));
             CurrencyDeflation = currencyDeflation ?? throw new ArgumentNullException(nameof(currencyDeflation));

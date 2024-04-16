@@ -1,19 +1,13 @@
 ﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
-    public class EurCurrencyDeflation : BaseCurrencyDeflation
+    public sealed class EurCurrencyDeflation : BaseCurrencyDeflation
     {
         public override Currency CurrencyCode => Currency.EUR;
-
-        public EurCurrencyDeflation()
-            : base(
-            new[,]
-                    {
-                    {"", "", ""},
-                    {"euro", "euro", "euro"},
-                    {"cent", "centy", "centów"}
-                })
-
+        public override string[,] Phases => new[,]
         {
-        }
+            { string.Empty, string.Empty, string.Empty },
+            { "euro", "euro", "euro" },
+            { "cent", "centy", "centów" }
+        };
     }
 }

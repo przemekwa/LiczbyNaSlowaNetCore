@@ -32,7 +32,7 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 
         public static ICurrencyDeflation GetCurrencyDeflation(Currency currency)
         {
-            var currencyInstance = CurrencyDeflationList.Find( x => x.CurrencyCode == currency )
+            var currencyInstance = CurrencyDeflationList.Find( x => x.CurrencyCode == currency)
                 ?? throw new NotImplementedException($"No currency deflation is defined for currency {currency}");
 
             return currencyInstance;

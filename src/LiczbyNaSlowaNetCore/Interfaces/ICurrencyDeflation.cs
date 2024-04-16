@@ -13,6 +13,7 @@ namespace LiczbyNaSlowaNetCore.Interfaces
         ///     Current currency code as stands in ISO 4217
         /// </summary>
         Currency CurrencyCode { get; }
+        string[,] Phases { get; }
 
         string GetDeflationPhrase(DeflationPhraseType phraseType, int grammarForm);
     }

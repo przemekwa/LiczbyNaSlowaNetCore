@@ -9,7 +9,7 @@ namespace LiczbyNaSlowaNETCore
     {
         public Currency Currency { get; set; }
 
-        public ICurrencyDictionary Dictionary { get; set; }
+        public IDeclensionDictionary Dictionary { get; set; }
 
         public string SplitDecimal { get; set; } = string.Empty;
 

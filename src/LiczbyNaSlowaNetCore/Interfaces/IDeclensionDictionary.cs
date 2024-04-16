@@ -4,7 +4,7 @@ namespace LiczbyNaSlowaNetCore.Interfaces
 {
     using System.Collections.Generic;
 
-    public interface ICurrencyDictionary
+    public interface IDeclensionDictionary
     {
         List<string> Unity { get; }
         List<string> OthersTens { get; }

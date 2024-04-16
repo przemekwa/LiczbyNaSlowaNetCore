@@ -1,18 +1,13 @@
 ﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
-    public class EmptyCurrencyDeflation : BaseCurrencyDeflation
+    public sealed class EmptyCurrencyDeflation : BaseCurrencyDeflation
     {
         public override Currency CurrencyCode => Currency.NONE;
-
-        public EmptyCurrencyDeflation()
-            : base(
-                  new[ , ]
-                    {
-                        {"", "", ""},
-                        {"", "", ""},
-                        {"", "", ""}
-                    } )
-        { 
-        }
+        public override string[,] Phases => new[,]
+        {
+            { string.Empty, string.Empty, string.Empty },
+            { string.Empty, string.Empty, string.Empty },
+            { string.Empty, string.Empty, string.Empty }
+        };
     }
 }
