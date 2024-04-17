@@ -23,7 +23,8 @@ namespace LiczbyNaSlowaNETCore.Dictionaries
             { "milion", "miliony", "milionów" },
             { "miliard", "miliardy", "miliardów" },
             { "bilion", "biliony", "bilionów" },
-            { "biliard", "biliardy", "biliardów" }
+            { "biliard", "biliardy", "biliardów" },
+            { "trylion", "tryliony", "trylionów" },
         };
         public List<string> Sign => new List<string> { "plus", "minus" };
         public string[,] Current => new string[,]

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
 {
-    public class Billions : TestBase
+    public class Miliards : TestBase
     {
         [Fact]
         public void Test_2000000000()
