@@ -49,7 +49,7 @@ namespace LiczbyNaSlowaNETCore
 
         public static string Convert(decimal number, Currency currency = Currency.NONE, bool stems = false )
         {
-            return CommonConvert(SplitNumbers(number), new NumberToTextOptions
+            return CommonConvert(SplitNumbers(number, currency), new NumberToTextOptions
             {
                 Stems = stems,
                 Currency = currency,
@@ -58,7 +58,7 @@ namespace LiczbyNaSlowaNETCore
 
         public static string Convert(int number, NumberToTextOptions options) => Convert((long)number, options);
         public static string Convert(long number, NumberToTextOptions options) => CommonConvert(new[] { number }, options);
-        public static string Convert(decimal number, NumberToTextOptions options) => CommonConvert(SplitNumbers(number), options);
+        public static string Convert(decimal number, NumberToTextOptions options) => CommonConvert(SplitNumbers(number, options.Currency), options);
 
         private static string CommonConvert(IEnumerable<long> numbers, NumberToTextOptions options)
         {
@@ -75,7 +75,7 @@ namespace LiczbyNaSlowaNETCore
         /// </summary>
         /// <param name="number">If number is greater than long.MaxValue it returns empty array</param>
         /// <returns>Array of up to 2 long numbers</returns>
-        private static IEnumerable<long> SplitNumbers(decimal number)
+        private static IEnumerable<long> SplitNumbers(decimal number, Currency currency)
         {
             // eg. 2519203.519203
             // will result in
@@ -88,7 +88,7 @@ namespace LiczbyNaSlowaNETCore
             var beforeComma = (long) Math.Truncate(roundedNumber);
             var afterComma = (long) Math.Abs((beforeComma - roundedNumber) * 100);
 
-            return afterComma == 0 ? new long[] { beforeComma } : new long[] { beforeComma, afterComma };
+            return currency == Currency.NONE && afterComma == 0 ? new long[] { beforeComma } : new long[] { beforeComma, afterComma }; 
         }
     }
 }
