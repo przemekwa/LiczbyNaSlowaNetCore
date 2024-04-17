@@ -10,16 +10,6 @@ namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
 {
     public class CurrencyDecimal : TestBase
     {
-        private NumberToTextOptions GetOptionsFor(Currency currency)
-        {
-            return new NumberToTextOptions
-            {
-                Stems = true,
-                Currency = currency,
-                Dictionary = new PolishDictionary()
-            };
-        }
-
         [Fact]
         public void Test_Currency_6_486()
         {
@@ -374,6 +364,17 @@ namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
         public void Test_CurrencySEK_5NOSTEM()
         {
             Assert.Equal("piec koron szwedzkich zero øre", NumberToText.Convert(5.00M, Currency.SEK));
+        }
+
+
+        private static NumberToTextOptions GetOptionsFor(Currency currency)
+        {
+            return new NumberToTextOptions
+            {
+                Stems = true,
+                Currency = currency,
+                Dictionary = new PolishDictionary()
+            };
         }
     }
 }

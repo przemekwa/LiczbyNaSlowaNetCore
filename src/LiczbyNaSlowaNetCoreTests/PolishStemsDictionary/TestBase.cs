@@ -5,14 +5,14 @@ namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
 {
     public class TestBase
     {
-        protected NumberToTextOptions PolishDictionaryWithStemsOptions => new()
+        protected static NumberToTextOptions PolishDictionaryWithStemsOptions => new()
         {
             Dictionary = new PolishDictionary(),
             Currency = Currency.NONE,
             Stems = true
         };
 
-        protected NumberToTextOptions PolishDictionaryWithoutStemsOptions => new()
+        protected static NumberToTextOptions PolishDictionaryWithoutStemsOptions => new()
         {
             Dictionary = new PolishDictionary(),
             Currency = Currency.NONE,
