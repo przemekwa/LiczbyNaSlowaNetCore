@@ -6,8 +6,8 @@ namespace LiczbyNaSlowaNetCore.Interfaces
 
     public interface IDeclensionDictionary
     {
-        List<string> Unity { get; }
-        List<string> OthersTens { get; }
+        List<string> Units { get; }
+        List<string> AboveTen { get; }
         List<string> Tens { get; }
         List<string> Hundreds { get; }
         string[,] Endings { get; }

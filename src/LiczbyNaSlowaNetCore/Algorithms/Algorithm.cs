@@ -6,7 +6,6 @@ namespace LiczbyNaSlowaNETCore
     using Algorithms;
     using LiczbyNaSlowaNetCore.Interfaces;
     using System;
-    using System.Collections.Generic;
 
     internal abstract class Algorithm : IAlgorithm
     {
@@ -23,7 +22,7 @@ namespace LiczbyNaSlowaNETCore
             WithStems = withStems;
         }
 
-        public abstract string Build(IEnumerable<long> numbers);
+        public abstract string Build(long? beforeComma, long? afterComma);
 
         protected virtual string SetSpaceBeforeString(string @string)
         {

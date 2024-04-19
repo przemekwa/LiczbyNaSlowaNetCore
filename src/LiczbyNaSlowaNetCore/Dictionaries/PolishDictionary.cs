@@ -8,9 +8,9 @@ namespace LiczbyNaSlowaNETCore.Dictionaries
 
     public class PolishDictionary : IDeclensionDictionary
     {
-        public List<string> Unity 
+        public List<string> Units 
             => new List<string> { string.Empty, "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "zero" };
-        public List<string> OthersTens 
+        public List<string> AboveTen 
             => new List<string> { string.Empty, "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście" };
         public List<string> Tens 
             => new List<string> { string.Empty, "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt" };

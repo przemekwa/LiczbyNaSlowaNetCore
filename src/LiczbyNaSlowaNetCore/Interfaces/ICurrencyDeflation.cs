@@ -2,7 +2,11 @@
 
 namespace LiczbyNaSlowaNetCore.Interfaces
 {
-    public enum DeflationPhraseType { BeforeComma = 1, AfterComma };
+    public enum DeflationPhraseType
+    {
+        BeforeComma = 1,
+        AfterComma = 2
+    };
 
     /// <summary>
     ///     Interface for classes that define deflation table for specific currency.

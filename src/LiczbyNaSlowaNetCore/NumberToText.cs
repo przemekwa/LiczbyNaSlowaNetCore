@@ -1,11 +1,8 @@
-﻿
-// Copyright (c) 2014 Przemek Walkowski
+﻿// Copyright (c) 2014 Przemek Walkowski
 
 namespace LiczbyNaSlowaNETCore
 {
     using System;
-    using System.Collections.Generic;
-
     using Algorithms;
     using Dictionaries;
     using Dictionaries.Currencies;
@@ -23,34 +20,39 @@ namespace LiczbyNaSlowaNETCore
 
         public static string Convert(long number, Currency currency = Currency.NONE, bool stems = false)
         {
-            return CommonConvert(new[] { number }, new NumberToTextOptions
+            return CommonConvert(number, null, new NumberToTextOptions
             {
                 Stems = stems,
                 Currency = currency,
             });
         }
 
-        public static string Convert(decimal number, Currency currency = Currency.NONE, bool stems = false )
+        public static string Convert(decimal number, Currency currency = Currency.NONE, bool stems = false)
         {
-            return CommonConvert(SplitNumbers(number, currency), new NumberToTextOptions
+            var (beforeComma, afterComma) = SplitDecimalToNumbersBeforeAndAfterPoint(number, currency);
+            return CommonConvert(beforeComma, afterComma, new NumberToTextOptions
             {
                 Stems = stems,
                 Currency = currency,
             });
         }
 
-        public static string Convert(int number, NumberToTextOptions options) => Convert((long)number, options);
-        public static string Convert(long number, NumberToTextOptions options) => CommonConvert(new[] { number }, options);
-        public static string Convert(decimal number, NumberToTextOptions options) => CommonConvert(SplitNumbers(number, options.Currency), options);
+        public static string Convert(int number, NumberToTextOptions options) => CommonConvert(number, null, options);
+        public static string Convert(long number, NumberToTextOptions options) => CommonConvert(number, null, options);
+        public static string Convert(decimal number, NumberToTextOptions options)
+        {
+            var(beforeComma, afterComma) = SplitDecimalToNumbersBeforeAndAfterPoint(number, options.Currency);
+            return CommonConvert(beforeComma, afterComma, options);
+        } 
 
-        private static string CommonConvert(IEnumerable<long> numbers, NumberToTextOptions options)
+        private static string CommonConvert(long? beforeComma, long? afterComma, NumberToTextOptions options)
         {
             var currencyDeflation = CurrencyDeflationFactory.GetCurrencyDeflation(options.Currency);
             var dictionary = options.Dictionary ?? new PolishDictionary();
 
             var algorithm = new CurrencyAlgorithm(dictionary, currencyDeflation, options.SplitDecimal, options.Stems);
            
-            return algorithm.Build(numbers);
+            return algorithm.Build(beforeComma, afterComma);
         }
 
         /// <summary>
@@ -58,20 +60,20 @@ namespace LiczbyNaSlowaNETCore
         /// </summary>
         /// <param name="number">If number is greater than long.MaxValue it returns empty array</param>
         /// <returns>Array of up to 2 long numbers</returns>
-        private static IEnumerable<long> SplitNumbers(decimal number, Currency currency)
+        private static (long?, long?) SplitDecimalToNumbersBeforeAndAfterPoint(decimal number, Currency currency)
         {
             // eg. 2519203.519203
             // will result in
             // [0] = 2519203
             // [1] = 52 (rounding)
             if (number > long.MaxValue)
-                return Array.Empty<long>();
+                return (null, null);
 
             var roundedNumber = Math.Round(number, 2);
             var beforeComma = (long) Math.Truncate(roundedNumber);
             var afterComma = (long) Math.Abs((beforeComma - roundedNumber) * 100);
 
-            return currency == Currency.NONE && afterComma == 0 ? new long[] { beforeComma } : new long[] { beforeComma, afterComma }; 
+            return currency == Currency.NONE && afterComma == 0 ? (beforeComma, null as long?) : (beforeComma, afterComma); 
         }
     }
 }
