@@ -10,23 +10,6 @@ namespace LiczbyNaSlowaNETCore
     using Dictionaries;
     using Dictionaries.Currencies;
 
-    public enum Currency
-    {
-        NONE,
-        PLN,
-        CHF,
-        CZK,
-        EUR,
-        HUF,
-        JPY,
-        LTL,
-        NOK,
-        SEK,
-        USD,
-        GBP,
-        PERCENT
-    }
-
     public static class NumberToText
     {
         /// <summary>
