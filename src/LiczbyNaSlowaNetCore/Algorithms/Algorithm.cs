@@ -22,7 +22,7 @@ namespace LiczbyNaSlowaNETCore
             WithStems = withStems;
         }
 
-        public abstract string Build(long? beforeComma, long? afterComma);
+        public abstract string Build(int sign, long? beforeComma, long? afterComma);
 
         protected virtual string SetSpaceBeforeString(string @string)
         {

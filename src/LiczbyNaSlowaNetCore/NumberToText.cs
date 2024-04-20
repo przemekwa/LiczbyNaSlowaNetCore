@@ -16,11 +16,18 @@ namespace LiczbyNaSlowaNETCore
         /// <param name="currency">Currency of number</param>
         /// <param name="stems">Stems</param>
         /// <returns>words that describe the number</returns>
-        public static string Convert(int number, Currency currency = Currency.NONE, bool stems = false) => Convert((long)number, currency, stems);
+        public static string Convert(int number, Currency currency = Currency.NONE, bool stems = false)
+        {
+            return CommonConvert(Math.Sign(number), number, null, new NumberToTextOptions
+            {
+                Stems = stems,
+                Currency = currency,
+            });
+        } 
 
         public static string Convert(long number, Currency currency = Currency.NONE, bool stems = false)
         {
-            return CommonConvert(number, null, new NumberToTextOptions
+            return CommonConvert(Math.Sign(number), number, null, new NumberToTextOptions
             {
                 Stems = stems,
                 Currency = currency,
@@ -30,29 +37,30 @@ namespace LiczbyNaSlowaNETCore
         public static string Convert(decimal number, Currency currency = Currency.NONE, bool stems = false)
         {
             var (beforeComma, afterComma) = SplitDecimalToNumbersBeforeAndAfterPoint(number, currency);
-            return CommonConvert(beforeComma, afterComma, new NumberToTextOptions
+            return CommonConvert(Math.Sign(number), beforeComma, afterComma, new NumberToTextOptions
             {
-                Stems = stems,
+                Stems= stems,
                 Currency = currency,
             });
         }
 
-        public static string Convert(int number, NumberToTextOptions options) => CommonConvert(number, null, options);
-        public static string Convert(long number, NumberToTextOptions options) => CommonConvert(number, null, options);
+        public static string Convert(int number, NumberToTextOptions options) => CommonConvert(Math.Sign(number), number, null, options);
+        public static string Convert(long number, NumberToTextOptions options) => CommonConvert(Math.Sign(number), number, null, options);
         public static string Convert(decimal number, NumberToTextOptions options)
         {
-            var(beforeComma, afterComma) = SplitDecimalToNumbersBeforeAndAfterPoint(number, options.Currency);
-            return CommonConvert(beforeComma, afterComma, options);
+            var (beforeComma, afterComma) = SplitDecimalToNumbersBeforeAndAfterPoint(number, options.Currency);
+            return CommonConvert(Math.Sign(number), beforeComma, afterComma, options);
         } 
 
-        private static string CommonConvert(long? beforeComma, long? afterComma, NumberToTextOptions options)
+        private static string CommonConvert(int sign, long? beforeComma, long? afterComma, NumberToTextOptions options)
         {
-            var currencyDeflation = CurrencyDeflationFactory.GetCurrencyDeflation(options.Currency);
             var dictionary = options.Dictionary ?? new PolishDictionary();
-
+            var currencyDeflation = CurrencyDeflationFactory.GetCurrencyDeflation(options.Currency);
             var algorithm = new CurrencyAlgorithm(dictionary, currencyDeflation, options.SplitDecimal, options.Stems);
-           
-            return algorithm.Build(beforeComma, afterComma);
+
+            return algorithm.Build(sign, 
+                beforeComma is null ? null : (long?) Math.Abs(beforeComma.Value),
+                afterComma is null ? null : (long?)Math.Abs(afterComma.Value));
         }
 
         /// <summary>
@@ -69,6 +77,7 @@ namespace LiczbyNaSlowaNETCore
             if (number > long.MaxValue)
                 return (null, null);
 
+            
             var roundedNumber = Math.Round(number, 2);
             var beforeComma = (long) Math.Truncate(roundedNumber);
             var afterComma = (long) Math.Abs((beforeComma - roundedNumber) * 100);

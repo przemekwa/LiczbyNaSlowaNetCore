@@ -5,6 +5,6 @@ namespace LiczbyNaSlowaNETCore.Algorithms
 {
     internal interface IAlgorithm
     {
-        string Build(long? beforeComma, long? afterComma);
+        string Build(int sign, long? beforeComma, long? afterComma);
     }
 }

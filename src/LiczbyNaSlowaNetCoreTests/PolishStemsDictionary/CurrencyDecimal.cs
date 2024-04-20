@@ -89,6 +89,18 @@ namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
         }
 
         [Fact]
+        public void Test_Currency_Minus_23_12()
+        {
+            Assert.Equal("minus dwadzieścia trzy złote dwanaście groszy", NumberToText.Convert(-23.12M, GetOptionsFor(Currency.PLN)));
+        }
+
+        [Fact]
+        public void Test_Currency_Minus_0_12()
+        {
+            Assert.Equal("minus dwanaście groszy", NumberToText.Convert(-0.12M, GetOptionsFor(Currency.PLN)));
+        }
+
+        [Fact]
         public void Test_Currency_13_0()
         {
             Assert.Equal("trzynaście złotych zero groszy", NumberToText.Convert(13.0M, GetOptionsFor(Currency.PLN)));
@@ -153,6 +165,12 @@ namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
         public void Test_Currency_5()
         {
             Assert.Equal("pięć złotych", NumberToText.Convert(5, GetOptionsFor(Currency.PLN)));
+        }
+
+        [Fact]
+        public void Test_Currency_Minus_5()
+        {
+            Assert.Equal("minus pięć złotych", NumberToText.Convert(-5, GetOptionsFor(Currency.PLN)));
         }
 
         [Fact]
