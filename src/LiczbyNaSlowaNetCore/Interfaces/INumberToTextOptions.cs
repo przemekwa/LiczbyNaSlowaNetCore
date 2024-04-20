@@ -7,9 +7,9 @@ namespace LiczbyNaSlowaNetCore.Interfaces
 {
     public interface INumberToTextOptions
     {
-        public Currency Currency { get; set; }
-        public IDeclensionDictionary Dictionary { get; set; }
-        public string SplitDecimal { get; set; }
-        public bool Stems { get; set; }
+        Currency Currency { get; set; }
+        IDeclensionDictionary Dictionary { get; set; }
+        string SplitDecimal { get; set; }
+        bool Stems { get; set; }
     }
 }
