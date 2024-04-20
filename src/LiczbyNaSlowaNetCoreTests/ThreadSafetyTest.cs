@@ -11,14 +11,15 @@ namespace LiczbyNaSlowaNetCoreTests
         {
             bool failed = false;
             int iterations = 100;
-            const string correctResponse = "jeden tysiąc dziewięćset dziewięćdziesiąt dziewięć";
+            const string correctResponseThread1 = "jeden tysiąc dziewięćset dziewięćdziesiąt dziewięć";
+            const string correctResponseThread2 = "piecdziesiat jeden tysiecy trzynascie zlotych piec groszy";
             // threads interact with some object - either 
             Thread thread1 = new Thread(new ThreadStart(delegate () {
                 for (int i = 0; i < iterations; i++)
                 {
                     var result = NumberToText.Convert(1999m, stems: true); // call unsafe code
                     // check that object is not out of synch due to other thread
-                    if (!result.Equals(correctResponse))
+                    if (!result.Equals(correctResponseThread1))
                     {
                         failed = true;
                     }
@@ -27,9 +28,9 @@ namespace LiczbyNaSlowaNetCoreTests
             Thread thread2 = new Thread(new ThreadStart(delegate () {
                 for (int i = 0; i < iterations; i++)
                 {
-                    var result = NumberToText.Convert(1999m, stems: true); // call unsafe code
+                    var result = NumberToText.Convert(51013.05m, Currency.PLN); // call unsafe code
                     // check that object is not out of synch due to other thread
-                    if (!result.Equals(correctResponse))
+                    if (!result.Equals(correctResponseThread2))
                     {
                         failed = true;
                     }
