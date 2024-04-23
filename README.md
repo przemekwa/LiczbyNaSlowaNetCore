@@ -6,9 +6,11 @@ Konwerter liczb na odpowiedniki słowne z zachowaniem polskiej gramatyki.
 
 Pełna dokumentacja i przykłady jak korzystać z tej biblioteki są tutaj https://github.com/przemekwa/LiczbyNaSlowaNET. Biblioteka jest bezpośrednim portem z biblioteki z .NET Framework-a
 
-Wszystko jest tak samo jak w orginalnej bibliotece. Z ta różnicą, że nie testowałem tego czy w .NET Core biblioteka jest bezpieczna w środowisku wielowatkowym czy też nie.
+Wszystko jest tak samo jak w orginalnej bibliotece. Biblioteka została przetestowana nieznacznie pod kątem bezpieczeństwa wielowątkowego
 
 Biblioteka do wersji 
 
-+ .NET Core 1.0 
-+ .NET Standard 1.6
++ .NET 5 do 8
++ .NET Core 2.0 do 3.1
++ .NET Framework 4.6.1 do 4.8.1
++ .NET Standard 2.0

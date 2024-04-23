@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+namespace LiczbyNaSlowaNetCore.Interfaces
 {
     public interface ICurrencyNotMaleDeflectionAfterComma
     {
-        List<String> GetAfterCommaUnity( bool withStems );
+        List<string> GetAfterCommaUnity();
     }
 }

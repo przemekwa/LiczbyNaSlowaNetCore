@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+namespace LiczbyNaSlowaNetCore.Interfaces
 {
     public interface ICurrencyNotMaleDeflectionBeforeComma
     {
-        List<String> GetBeforeCommaUnity( bool withStems );
+        List<string> GetBeforeCommaUnity();
     }
 }

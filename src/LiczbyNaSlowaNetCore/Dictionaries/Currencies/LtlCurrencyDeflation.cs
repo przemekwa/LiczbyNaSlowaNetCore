@@ -1,26 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
-    public class LtlCurrencyDeflation : BaseCurrencyDeflation
+    public sealed class LtlCurrencyDeflation : BaseCurrencyDeflation
     {
         public override Currency CurrencyCode => Currency.LTL;
-
-        public LtlCurrencyDeflation()
-            : base( new[ , ]
-                   {
-                    {"", "", ""},
-                    {"lit litewski", "lity litewskie", "litow litewskich"},
-                    {"cent", "centy", "centow"}
-                },
-                new[ , ]
-                    {
-                    {"", "", ""},
-                    {"lit litewski", "lity litewskie", "litów litewskich"},
-                    {"cent", "centy", "centów"}
-                } )
+        public override string[,] Phases => new[,]
         {
-
-        }
+            { string.Empty, string.Empty, string.Empty },
+            { "lit litewski", "lity litewskie", "litów litewskich" },
+            { "cent", "centy", "centów" }
+        };
     }
 }

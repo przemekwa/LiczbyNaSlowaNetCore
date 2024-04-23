@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LiczbyNaSlowaNETCore;
+﻿using LiczbyNaSlowaNETCore;
 using LiczbyNaSlowaNETCore.Dictionaries;
-using LiczbyNaSlowaNETCore.Dictionaries.Currencies;
 
 namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
 {
-    public abstract class TestBase
+    public class TestBase
     {
-        protected NumberToTextOptions NumberToTextOptions { get; set; } = new NumberToTextOptions
+        protected static NumberToTextOptions PolishDictionaryWithStemsOptions => new()
         {
-            Dictionary = new PolishWithsStemsDictionary(),
-            Currency = Currency.NONE
+            Dictionary = new PolishDictionary(),
+            Currency = Currency.NONE,
+            Stems = true
+        };
+
+        protected static NumberToTextOptions PolishDictionaryWithoutStemsOptions => new()
+        {
+            Dictionary = new PolishDictionary(),
+            Currency = Currency.NONE,
+            Stems = false
         };
     }
 }

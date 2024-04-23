@@ -3,38 +3,26 @@
 
 namespace LiczbyNaSlowaNETCore
 {
-    using System;
-    using System.Collections.Generic;
-
     using Algorithms;
-    using Dictionaries;
-    using Dictionaries.Currencies;
+    using LiczbyNaSlowaNetCore.Interfaces;
+    using System;
+
     internal abstract class Algorithm : IAlgorithm
     {
-        protected readonly ICurrencyDictionary dictionary;
-        protected readonly ICurrencyDeflation currencyDeflation;
-        protected readonly string splitDecimal;
-        protected readonly bool withStems;
+        protected readonly IDeclensionDictionary Dictionary;
+        protected readonly ICurrencyDeflation CurrencyDeflation;
+        protected readonly string SplitDecimal;
+        protected readonly bool WithStems;
         
-        protected Algorithm(ICurrencyDictionary dictionary, ICurrencyDeflation currencyDeflation, string splitDecimal, bool withStems )
+        protected Algorithm(IDeclensionDictionary dictionary, ICurrencyDeflation currencyDeflation, string splitDecimal, bool withStems )
         {
-            if (dictionary == null)
-            {
-                throw new ArgumentNullException(nameof(dictionary));
-            }
-
-            if (currencyDeflation == null)
-            {
-                throw new ArgumentNullException(nameof(currencyDeflation));
-            }
-
-            this.dictionary = dictionary;
-            this.currencyDeflation = currencyDeflation;
-            this.splitDecimal = splitDecimal;
-            this.withStems = withStems;
+            Dictionary = dictionary ?? throw new ArgumentNullException(nameof(dictionary));
+            CurrencyDeflation = currencyDeflation ?? throw new ArgumentNullException(nameof(currencyDeflation));
+            SplitDecimal = splitDecimal;
+            WithStems = withStems;
         }
 
-        public abstract string Build( IEnumerable<long> numbers );
+        public abstract string Build(int sign, long? beforeComma, long? afterComma);
 
         protected virtual string SetSpaceBeforeString(string @string)
         {

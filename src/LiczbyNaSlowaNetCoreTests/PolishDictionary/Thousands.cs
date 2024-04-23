@@ -1,53 +1,50 @@
 ﻿
 // Copyright (c) 2014 Przemek Walkowski
 
-using System;
-
 using LiczbyNaSlowaNETCore;
 using Xunit;
 
 namespace LiczbyNaSlowaNETCoreTests
 {
-    
-    public class Thousands 
+    public class Thousands
     {
-       [Fact]
+        [Fact]
         public void Test_1002()
         {
             Assert.Equal("jeden tysiac dwa", NumberToText.Convert(1002));
         }
 
-       [Fact]
+        [Fact]
         public void Test_120030()
         {
             Assert.Equal("sto dwadziescia tysiecy trzydziesci", NumberToText.Convert(120030));
         }
 
-       [Fact]
+        [Fact]
         public void Test_123000()
         {
             Assert.Equal("sto dwadziescia trzy tysiace", NumberToText.Convert(123000));
         }
 
-       [Fact]
+        [Fact]
         public void Test_123032()
         {
             Assert.Equal("sto dwadziescia trzy tysiace trzydziesci dwa", NumberToText.Convert(123032));
         }
 
-       [Fact]
+        [Fact]
         public void Test_123360()
         {
             Assert.Equal("sto dwadziescia trzy tysiace trzysta szescdziesiat", NumberToText.Convert(123360));
         }
 
-       [Fact]
+        [Fact]
         public void Test_824702()
         {
             Assert.Equal("osiemset dwadziescia cztery tysiace siedemset dwa", NumberToText.Convert(824702));
         }
 
-       [Fact]
+        [Fact]
         public void Test_14100()
         {
             Assert.Equal("czternascie tysiecy sto", NumberToText.Convert(14100));

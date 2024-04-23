@@ -4,72 +4,35 @@
 namespace LiczbyNaSlowaNETCore.Dictionaries
 {
     using System.Collections.Generic;
+    using LiczbyNaSlowaNetCore.Interfaces;
 
-    using Currencies;
-
-    public class PolishDictionary : ICurrencyDictionary
+    public class PolishDictionary : IDeclensionDictionary
     {
-        public PolishDictionary()
+        public List<string> Units 
+            => new List<string> { string.Empty, "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "zero" };
+        public List<string> AboveTen 
+            => new List<string> { string.Empty, "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście" };
+        public List<string> Tens 
+            => new List<string> { string.Empty, "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt" };
+        public List<string> Hundreds
+            => new List<string> { string.Empty, "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset" };
+        public string[,] Endings => new string[,]
         {
-            Unity = new List<string>
-                {
-                    "","jeden","dwa" , "trzy", "cztery", "piec", "szesc", "siedem", "osiem", "dziewiec","zero"
-                };
-
-            OthersTens = new List<string>
-                {
-                    "","jedenascie", "dwanascie","trzynascie" , "czternascie", "pietnascie", "szesnascie", "siedemnascie", "osiemnascie", "dziewietnascie"
-                };
-
-            Tens = new List<string>
-                {
-                    "","dziesiec", "dwadziescia","trzydziesci" , "czterdziesci", "piecdziesiat", "szescdziesiat", "siedemdziesiat", "osiemdziesiat", "dziewiecdziesiat"
-                };
-
-            Hundreds = new List<string>
-                {
-                    "","sto", "dwiescie","trzysta" , "czterysta", "piecset", "szescset", "siedemset", "osiemset", "dziewiecset"
-                };
-
-            Endings = new[,]
-            {
-                {"","",""},
-                {"tysiac","tysiace","tysiecy"},
-                {"milion","miliony","milionow"},
-                {"miliard","miliardy","miliardow"},
-                {"bilion","biliony","bilionow"},
-                {"biliard","biliardy","biliardow"}
-            };
-
-            Sign = new List<string>
-            {
-                "plus", "minus"
-            };
-
-            Current = new[,]
-            {
-                {"","",""},
-                {"zloty","zlote","zlotych"},
-                {"grosz","grosze","groszy"}
-            };
-        }
-
-        public List<string> Unity { get; }
-
-        public List<string> OthersTens { get; }
-
-        public List<string> Tens { get; }
-
-        public List<string> Hundreds { get; }
-
-        public string[,] Endings { get; }
-
-        public List<string> Sign { get; }
-
-        public string[,] Current { get; }
-
-        
-
-        public bool HasStems { get; } = false;
+            { string.Empty, string.Empty, string.Empty },
+            { "tysiąc", "tysiące", "tysięcy" },
+            { "milion", "miliony", "milionów" },
+            { "miliard", "miliardy", "miliardów" },
+            { "bilion", "biliony", "bilionów" },
+            { "biliard", "biliardy", "biliardów" },
+            { "trylion", "tryliony", "trylionów" },
+        };
+        public List<string> Sign => new List<string> { "plus", "minus" };
+        public string[,] Current => new string[,]
+        {
+            { string.Empty, string.Empty, string.Empty },
+            { "złoty", "złote", "złotych" },
+            { "grosz", "grosze", "groszy" }
+        };
+        public bool HasStems { get; } = true;
     }
 }

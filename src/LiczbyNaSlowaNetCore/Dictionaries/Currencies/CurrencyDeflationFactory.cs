@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using LiczbyNaSlowaNetCore.Interfaces;
 
 namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
@@ -29,11 +30,10 @@ namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 
         public static List<ICurrencyDeflation> CurrencyDeflationList { get; }
 
-        public static ICurrencyDeflation GetCurrencyDeflation(Currency currency )
+        public static ICurrencyDeflation GetCurrencyDeflation(Currency currency)
         {
-            var currencyInstance = CurrencyDeflationList.Find( x => x.CurrencyCode == currency );
-            if( currencyInstance == null )
-                throw new NotImplementedException( "No currency deflation is defined for currency " + currency );
+            var currencyInstance = CurrencyDeflationList.Find( x => x.CurrencyCode == currency)
+                ?? throw new NotImplementedException($"No currency deflation is defined for currency {currency}");
 
             return currencyInstance;
         }

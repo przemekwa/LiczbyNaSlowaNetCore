@@ -3,159 +3,167 @@
 
 namespace LiczbyNaSlowaNETCore.Algorithms
 {
+    using LiczbyNaSlowaNetCore.Interfaces;
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Dictionaries.Currencies;
-    using Dictionaries;
-    using System.Collections.Generic;
     internal sealed class CurrencyAlgorithm : Algorithm
     {
-        public CurrencyAlgorithm(ICurrencyDictionary dictionary, ICurrencyDeflation currencyDeflation, string splitDecimal, bool stems ) :
-           base(dictionary, currencyDeflation, splitDecimal, stems)
-        { }
+        public CurrencyAlgorithm(
+            IDeclensionDictionary dictionary,
+            ICurrencyDeflation currencyDeflation,
+            string splitDecimal,
+            bool stems
+            )
+            : base(dictionary,
+                  currencyDeflation,
+                  splitDecimal,
+                  stems
+                  ) { }
 
-        private readonly StringBuilder result = new StringBuilder();
-       
         private readonly long[] tempGrammarForm = { 2, 3, 4 };
 
-        public override string Build(IEnumerable<long> numbers)
+        public override string Build(int sign, long? beforeComma, long? afterComma)
         {
-            var currentPhase = DeflationPhraseType.BeforeComma;
+            if (beforeComma is null && afterComma is null)
+                return string.Empty;
 
-            foreach (var number in numbers )
-            {
-                var partialResult = new StringBuilder();
+            var signText = sign < 0 ? Dictionary.Sign[1] + " " : string.Empty;
+            var beforeCommaText = CanDoBeforeComma(sign, beforeComma) ? " " + GetNumberToText(DeflationPhraseType.BeforeComma, beforeComma.Value) : string.Empty;
+            var afterCommaText = afterComma.HasValue ? " " + GetNumberToText(DeflationPhraseType.AfterComma, afterComma.Value) : string.Empty;
+            var splitDecimal = " " + SplitDecimal ?? string.Empty;
+            
+            var result = signText;
+            if (!string.IsNullOrWhiteSpace(beforeCommaText))
+                result = result.Trim() + beforeCommaText;
 
-                if (number == 0)
-                {
-                    partialResult.Append(dictionary.Unity[10]);
+            if (!string.IsNullOrWhiteSpace(splitDecimal))
+                result = result.Trim() + splitDecimal;
 
-                    partialResult.Append(" ");
+            if (!string.IsNullOrWhiteSpace(afterCommaText))
+                result = (string.IsNullOrEmpty(SplitDecimal) ? result.Trim() : result) + afterCommaText;
 
-                    partialResult.Append( currencyDeflation.GetDeflationPhrase( currentPhase, 2, withStems ) );
-
-                    result.Append(partialResult.ToString().Trim());
-
-                    result.Append(" ");
-
-                    currentPhase = DeflationPhraseType.AfterComma;
-
-                    continue;
-                   
-                }
-
-                if (number < 0)
-                {
-                    partialResult.Append(dictionary.Sign[2]);
-                }
-
-                var tempNumber = number;
-
-                int order = 0;
-                int hundreds = 0, tens = 0, unity = 0, othersTens = 0, sumAboveUnity = 0;
-
-                while (tempNumber != 0)
-                {
-                    hundreds = (int)( ( tempNumber % 1000 ) / 100 );
-                    tens = (int)( ( tempNumber % 100 ) / 10 );
-                    unity = (int)( tempNumber % 10 );
-                    othersTens = 0;
-
-                    if ( tens == 1 && unity > 0)
-                    {
-                        othersTens = unity;
-                        tens = 0;
-                        unity = 0;
-                    }
-                    else
-                    {
-                        othersTens = 0;
-                    }
-
-                    sumAboveUnity = hundreds + tens + othersTens;
-                    var grammarForm = this.GetGrammarForm( unity, sumAboveUnity );
-                    
-
-                    if ((unity + sumAboveUnity) > 0)
-                    {
-                        var tempPartialResult = partialResult.ToString().Trim();
-
-                        partialResult.Clear();
-                        var properUnity = dictionary.Unity;
-
-                        if (currentPhase == DeflationPhraseType.AfterComma && currencyDeflation is ICurrencyNotMaleDeflectionAfterComma && tens == 0)
-                        {
-                            properUnity = ( currencyDeflation as ICurrencyNotMaleDeflectionAfterComma ).GetAfterCommaUnity( withStems );
-                        }
-
-                        if (currentPhase == DeflationPhraseType.BeforeComma && currencyDeflation is ICurrencyNotMaleDeflectionBeforeComma)
-                        {
-                            properUnity = ( currencyDeflation as ICurrencyNotMaleDeflectionBeforeComma ).GetBeforeCommaUnity( withStems );
-                        }
-
-                        partialResult.AppendFormat( "{0}{1}{2}{3}{4}{5}",
-                            this.SetSpaceBeforeString( dictionary.Hundreds[ hundreds ] ),
-                            this.SetSpaceBeforeString( dictionary.Tens[ tens ] ),
-                            this.SetSpaceBeforeString( dictionary.OthersTens[ othersTens ] ),
-                            this.SetSpaceBeforeString( properUnity[ unity ] ),
-                            this.SetSpaceBeforeString( dictionary.Endings[ order, grammarForm ] ),
-                            this.SetSpaceBeforeString( tempPartialResult ) );
-                    }
-
-                    order += 1;
-
-                    tempNumber = tempNumber / 1000;
-                }
-
-                // hm we are using here some variables (unity, tens, sumabove) that are modified inside above while loop and only there
-                // and yet we are using them here, outside loop. It would be better if we could use them only inside while loop...
-                partialResult.Append( this.SetSpaceBeforeString(
-                    currencyDeflation.GetDeflationPhrase( currentPhase, GetCurrencyForm( number, othersTens ), withStems ) ) );
-
-                result.Append(partialResult.ToString().Trim());
-
-                result.Append(" ");
-
-                if (currentPhase == DeflationPhraseType.BeforeComma && !string.IsNullOrEmpty( splitDecimal ))
-                {
-                    result.Append(splitDecimal);
-                    result.Append(" ");
-                }
-
-                currentPhase = DeflationPhraseType.AfterComma;
-            }
-
-            return result.ToString().Trim();
+            return WithStems ? result.Trim() : RemoveStems(result).Trim();
         }
 
-        private int GetCurrencyForm( long number, int othersTens )
+        private bool CanDoBeforeComma(int sign, long? beforeComma)
         {
-            var hundreds = ( number % 1000 ) / 100;
+            //np -0,23 zł = minus dwadzieścia trzy grosze
+            if (beforeComma.HasValue && beforeComma == 0 && sign < 0) return false;
 
-            var tens = ( number % 100 ) / 10;
+            //np. 0,23 zł = zero złotych dwadzieścia trzy grosze
+            //np. 5 zł = pięć złotych
+            //np. 5,23 zł = pięć złotych dwadzieścia trzy grosze
+            //np. -5 zł = minus pięć złotych
+            return true;
+        }
 
-            var unity = number % 10;
+        private string GetNumberToText(DeflationPhraseType phase, long number)
+        {
+            if (number == 0)
+                return $"{Dictionary.Units[10]} {CurrencyDeflation.GetDeflationPhrase(phase, 2)}".Trim();
 
-            if( unity == 1 && ( hundreds + tens + othersTens == 0 ) )
+            var builder = new StringBuilder();
+            long tempNumber = number;
+
+            int order = 0;
+            while (tempNumber != 0)
             {
+                int hundreds = (int)((tempNumber % 1000) / 100);
+                int tens = (int)((tempNumber % 100) / 10);
+                int unity = (int)(tempNumber % 10);
+                int aboveTens;
+
+                if (tens == 1 && unity > 0)
+                {
+                    aboveTens = unity;
+                    tens = 0;
+                    unity = 0;
+                }
+                else
+                {
+                    aboveTens = 0;
+                }
+
+                int sumAboveUnity = hundreds + tens + aboveTens;
+                if ((unity + sumAboveUnity) > 0)
+                {
+                    var tempPartialResult = builder.ToString().Trim();
+
+                    builder.Clear();
+                    List<string> units = GetUnitsForCurrency(phase, tens);
+
+                    builder.AppendFormat("{0}{1}{2}{3}{4}{5}",
+                        SetSpaceBeforeString(Dictionary.Hundreds[hundreds]),
+                        SetSpaceBeforeString(Dictionary.Tens[tens]),
+                        SetSpaceBeforeString(Dictionary.AboveTen[aboveTens]),
+                        SetSpaceBeforeString(units[unity]),
+                        SetSpaceBeforeString(Dictionary.Endings[order, GetGrammarForm(unity, sumAboveUnity)]),
+                        SetSpaceBeforeString(tempPartialResult));
+                }
+
+                order += 1;
+                tempNumber /= 1000;
+            }
+
+            builder.Append(SetSpaceBeforeString(CurrencyDeflation.GetDeflationPhrase(phase, GetCurrencyGrammarForm(number))));
+
+            return builder.ToString().Trim();
+        }
+
+        private List<string> GetUnitsForCurrency(DeflationPhraseType phase, int tens)
+        {
+            var properUnits = Dictionary.Units;
+
+            if (phase == DeflationPhraseType.AfterComma && CurrencyDeflation is ICurrencyNotMaleDeflectionAfterComma && tens == 0)
+                properUnits = (CurrencyDeflation as ICurrencyNotMaleDeflectionAfterComma).GetAfterCommaUnity();
+
+            if (phase == DeflationPhraseType.BeforeComma && CurrencyDeflation is ICurrencyNotMaleDeflectionBeforeComma)
+                properUnits = (CurrencyDeflation as ICurrencyNotMaleDeflectionBeforeComma).GetBeforeCommaUnity();
+
+            return properUnits;
+        }
+
+        private string RemoveStems(string input)
+        {
+            return input.Replace('ą', 'a')
+                .Replace('ę', 'e')
+                .Replace('ó', 'o')
+                .Replace('ł', 'l')
+                .Replace('ć', 'c')
+                .Replace('ń', 'n')
+                .Replace('ś', 's')
+                .Replace('ż', 'z')
+                .Replace('ź', 'z');
+        }
+
+        private int GetCurrencyGrammarForm(long number)
+        {
+            long hundreds = (number % 1000) / 100;
+            long tens = (number % 100) / 10;
+            long unity = number % 10;
+
+            // np. jeden milion
+            if( unity == 1 && (hundreds + tens == 0) )
                 return 0;
-            }
 
+            // np. dwa/trzy/cztery miliony
             if (tempGrammarForm.Contains(unity) && tens != 1)
-            {
                 return 1;
-            }
 
+            // np. dwanaście milionów 
             return 2;
         }
 
-        private int GetGrammarForm( int unity, int sumAboveUnity )
+        private int GetGrammarForm(int unity, int sumAboveUnity)
         {
-            if ( unity == 1 && sumAboveUnity == 0)
+            // np. jeden tysiąc
+            if (unity == 1 && sumAboveUnity == 0)
                 return  0;
 
-            if (tempGrammarForm.Contains( unity ) )
+            if (tempGrammarForm.Contains(unity))
                 return 1;
 
             return 2;

@@ -1,23 +1,20 @@
 ﻿
 // Copyright (c) 2014 Przemek Walkowski
 
-using System;
-
 using LiczbyNaSlowaNETCore;
 using Xunit;
 
 namespace LiczbyNaSlowaNETCoreTests.PolishStemsDictionary
 {
-    
     public class Unity : TestBase
     {
-       [Fact]
+        [Fact]
         public void Test_0()
         {
             Assert.Equal("zero", NumberToText.Convert(0));
         }
 
-       [Fact]
+        [Fact]
         public void Test_3()
         {
             Assert.Equal("trzy", NumberToText.Convert(3));

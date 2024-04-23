@@ -1,27 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
-    public class HufCurrencyDeflation : BaseCurrencyDeflation
+    public sealed class HufCurrencyDeflation : BaseCurrencyDeflation
     {
         public override Currency CurrencyCode => Currency.HUF;
-
-        public HufCurrencyDeflation()
-            : base(
-                  new[ , ]
-                                {
-                    {"", "", ""},
-                    {"forint", "forinty", "forintow"},
-                    {"", "", ""}
-                },
-                new[ , ]
-                                  {
-                    {"", "", ""},
-                    {"forint", "forinty", "forintów"},
-                    {"", "", ""}
-                } )
+        public override string[,] Phases => new[,]
         {
-
-        }
+            { string.Empty, string.Empty, string.Empty },
+            { "forint", "forinty", "forintów" },
+            { string.Empty, string.Empty, string.Empty }
+        };
     }
 }

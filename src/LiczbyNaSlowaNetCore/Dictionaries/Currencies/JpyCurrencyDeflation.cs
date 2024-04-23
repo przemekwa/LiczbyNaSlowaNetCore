@@ -1,26 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
+﻿namespace LiczbyNaSlowaNETCore.Dictionaries.Currencies
 {
-    public class JpyCurrencyDeflation : BaseCurrencyDeflation
+    public sealed class JpyCurrencyDeflation : BaseCurrencyDeflation
     {
         public override Currency CurrencyCode => Currency.JPY;
-
-        public JpyCurrencyDeflation()
-            : base( new[ , ]
-                   {
-                    {"", "", ""},
-                    {"jen", "jeny", "jenow"},
-                    {"", "", ""}
-                },
-                new[ , ]
-                   {
-                    {"", "", ""},
-                    {"jen", "jeny", "jenów"},
-                    {"", "", ""}
-                } )
-        {
-
-        }
+        public override string[,] Phases => new[,] 
+        { 
+            { string.Empty, string.Empty, string.Empty },
+            { "jen", "jeny", "jenów" },
+            { string.Empty, string.Empty, string.Empty }
+        };
     }
 }

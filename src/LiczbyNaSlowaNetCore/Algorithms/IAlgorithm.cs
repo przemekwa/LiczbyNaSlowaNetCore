@@ -3,12 +3,8 @@
 
 namespace LiczbyNaSlowaNETCore.Algorithms
 {
-    using System.Collections.Generic;
-
-    using Dictionaries;
-
     internal interface IAlgorithm
     {
-        string Build( IEnumerable<long> numbers );
+        string Build(int sign, long? beforeComma, long? afterComma);
     }
 }
